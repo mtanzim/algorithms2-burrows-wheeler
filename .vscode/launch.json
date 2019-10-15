@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - CircularSuffixArray",
+            "request": "launch",
+            "mainClass": "CircularSuffixArray",
+            "projectName": "burrows_afc1f0ec",
+            "args":"abra.txt",
+            "vmArgs":"-ea"
+        }
+    ]
+}
