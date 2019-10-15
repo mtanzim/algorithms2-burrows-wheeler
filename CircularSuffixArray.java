@@ -27,6 +27,7 @@ public class CircularSuffixArray {
         boolean debug = true;
         In in = new In(args[0]);
         String dictionary = in.readAll();
-        if (debug) StdOut.println(dictionary.toString());
+        if (debug)
+            StdOut.println(dictionary.toString());
     }
 }
