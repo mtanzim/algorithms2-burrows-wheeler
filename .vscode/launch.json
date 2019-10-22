@@ -1,13 +1,22 @@
 {
-    "configurations": [
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - CircularSuffixArray",
-            "request": "launch",
-            "mainClass": "CircularSuffixArray",
-            "projectName": "burrows_afc1f0ec",
-            "args":"abra.txt",
-            "vmArgs":"-ea"
-        }
-    ]
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - BurrowsWheeler",
+      "request": "launch",
+      "mainClass": "BurrowsWheeler",
+      "projectName": "burrows_afc1f0ec",
+      "args": "abra.txt",
+      "vmArgs": "-ea"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - CircularSuffixArray",
+      "request": "launch",
+      "mainClass": "CircularSuffixArray",
+      "projectName": "burrows_afc1f0ec",
+      "args": "abra.txt",
+      "vmArgs": "-ea"
+    }
+  ]
 }
