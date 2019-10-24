@@ -7,14 +7,19 @@
       "label": "Compile",
       "type": "shell",
       "command": "javac-algs4",
-      "args": [
-        "*.java"
-      ],
+      "args": ["*.java"],
       "problemMatcher": [],
       "group": {
         "kind": "build",
         "isDefault": true
       }
+    },
+    {
+      "label": "Test Burrows",
+      "type": "shell",
+      "command": "java-algs4 BurrowsWheeler - < abra.txt | java-algs4 BurrowsWheeler +",
+      "problemMatcher": [],
+      "dependsOn": ["Compile"]
     },
     {
       "label": "Coursera Checkstyle",
@@ -52,10 +57,7 @@
       "type": "shell",
       "command": "echo 'Done'",
       "problemMatcher": [],
-      "dependsOn": [
-        "Compile",
-        "Coursera Checkstyle"
-      ]
+      "dependsOn": ["Compile", "Coursera Checkstyle"]
     }
   ]
 }

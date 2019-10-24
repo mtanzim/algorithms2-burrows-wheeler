@@ -39,6 +39,25 @@ public class BurrowsWheeler {
     // apply Burrows-Wheeler inverse transform,
     // reading from standard input and writing to standard output
     public static void inverseTransform() {
+        boolean testing = true;
+        boolean debug = true;
+
+        String t;
+        int first;
+
+        if (testing) {
+            t = "ARD!RCAAAABB";
+            first = 3;
+        } else {
+            In in = new In();
+            first = in.readInt();
+            t = in.readString();
+        }
+        if (debug) {
+            StdOut.println(first);
+            StdOut.println(t);
+        }
+        StdOut.println("INVALID");
     }
 
     // if args[0] is "-", apply Burrows-Wheeler transform
@@ -46,7 +65,15 @@ public class BurrowsWheeler {
     public static void main(String[] args) {
 
         boolean debug = false;
-        if (debug) StdOut.println(args[0]);
+        boolean testing = true;
+
+        if (testing) {
+            inverseTransform();
+            return;
+        }
+
+        if (debug)
+            StdOut.println(args[0]);
         if (args[0].compareTo("-") == 0)
             transform();
         else if (args[0].compareTo("+") == 0)
