@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -36,27 +38,46 @@ public class BurrowsWheeler {
         StdOut.println(transformed);
     }
 
+    // https://www.coursera.org/lecture/algorithms-part2/key-indexed-counting-2pi1Z
+    private static void keyIndexCounter(char[] fc, char[] t, int first) {
+        boolean debug = true;
+        int[] next = new int[fc.length];
+        next[0] = first;
+        if (debug) {
+            String fcS = new String(fc);
+            String tS = new String(t);
+            StdOut.println("first index:\t\t" + first);
+            StdOut.println("first column:\t\t" + fcS);
+            StdOut.println("t column:\t\t" + tS);
+            StdOut.println("next array:\t\t" + Arrays.toString(next));
+        }
+
+    }
+
     // apply Burrows-Wheeler inverse transform,
     // reading from standard input and writing to standard output
     public static void inverseTransform() {
         boolean testing = true;
-        boolean debug = true;
+        // boolean debug = true;
 
-        String t;
+        String tS;
         int first;
 
+        // debug code
         if (testing) {
-            t = "ARD!RCAAAABB";
+            tS = "ARD!RCAAAABB";
             first = 3;
         } else {
             In in = new In();
             first = in.readInt();
-            t = in.readString();
+            tS = in.readString();
         }
-        if (debug) {
-            StdOut.println(first);
-            StdOut.println(t);
-        }
+
+        char[] t = tS.toCharArray();
+        char[] fc = tS.toCharArray();
+        Arrays.sort(fc);
+        keyIndexCounter(fc, t, first);
+
         StdOut.println("INVALID");
     }
 
