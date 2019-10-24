@@ -9,6 +9,31 @@ public class BurrowsWheeler {
     // apply Burrows-Wheeler transform,
     // reading from standard input and writing to standard output
     public static void transform() {
+        boolean debug = false;
+
+        // transform
+        In in = new In();
+        String inputS = in.readAll();
+        if (debug) {
+            StdOut.println(inputS);
+        }
+        CircularSuffixArray sa = new CircularSuffixArray(inputS);
+        int len = sa.length();
+        StringBuilder transformed = new StringBuilder();
+        int first = -1;
+        for (int i = 0; i < len; i++) {
+            int curIdx = sa.index(i);
+            String sliceA = inputS.substring(curIdx, inputS.length());
+            String sliceB = inputS.substring(0, curIdx);
+            String curString = sliceA + sliceB;
+            // StdOut.println(curString.charAt(len-1));
+            if (curString.compareTo(inputS) == 0) {
+                first = i;
+            }
+            transformed.append(curString.charAt(len - 1));
+        }
+        StdOut.println(first);
+        StdOut.println(transformed);
     }
 
     // apply Burrows-Wheeler inverse transform,
@@ -20,26 +45,15 @@ public class BurrowsWheeler {
     // if args[0] is "+", apply Burrows-Wheeler inverse transform
     public static void main(String[] args) {
 
-        // transform
-        In in = new In(args[0]);
-        String inputS = in.readAll();
-        CircularSuffixArray sa = new CircularSuffixArray(inputS);
-        int len = sa.length();
-        StringBuilder encrypted = new StringBuilder();
-        int first = -1;
-        for (int i = 0; i < len; i++) {
-            int curIdx = sa.index(i);
-            String sliceA = inputS.substring(curIdx, inputS.length());
-            String sliceB = inputS.substring(0, curIdx);
-            String curString = sliceA+sliceB;
-            // StdOut.println(curString.charAt(len-1));
-            if (curString.compareTo(inputS) == 0) {
-                first = i;
-            }
-            encrypted.append(curString.charAt(len-1));
-        }
-        StdOut.println(first);
-        StdOut.println(encrypted);
+        boolean debug = false;
+        if (debug) StdOut.println(args[0]);
+        if (args[0].compareTo("-") == 0)
+            transform();
+        else if (args[0].compareTo("+") == 0)
+            inverseTransform();
+        else
+            throw new IllegalArgumentException("Not allowed");
+
     }
 
 }

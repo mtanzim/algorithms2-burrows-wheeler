@@ -11,7 +11,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class CircularSuffixArray {
     private int len;
-    private CircularSuffix suffixes[];
+    private CircularSuffix[] suffixes;
 
     class CircularSuffix implements Comparable<CircularSuffix> {
         int id;
