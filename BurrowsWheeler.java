@@ -39,18 +39,48 @@ public class BurrowsWheeler {
     }
 
     // https://www.coursera.org/lecture/algorithms-part2/key-indexed-counting-2pi1Z
-    private static void keyIndexCounter(char[] fc, char[] t, int first) {
+    // key index counter to make next[]
+    private static int[] makeNext(char[] fc, char[] t, int first) {
         boolean debug = true;
-        int[] next = new int[fc.length];
-        next[0] = first;
-        if (debug) {
-            String fcS = new String(fc);
-            String tS = new String(t);
-            StdOut.println("first index:\t\t" + first);
-            StdOut.println("first column:\t\t" + fcS);
-            StdOut.println("t column:\t\t" + tS);
-            StdOut.println("next array:\t\t" + Arrays.toString(next));
+        class TNode implements Comparable<TNode> {
+            char value;
+            int index;
+
+            public TNode(char value, int index) {
+                this.index = index;
+                this.value = value;
+            }
+
+            public int compareTo(TNode that) {
+                return Character.compare(value, that.value);
+            }
+
+            public int getIndex() {
+                return index;
+            }
         }
+        int[] next = new int[fc.length];
+        TNode[] tNodes = new TNode[t.length];
+        for (int i = 0; i < next.length; i++) {
+            next[i] = -1;
+            tNodes[i] = new TNode(t[i], i);
+
+        }
+        Arrays.sort(tNodes);
+        for (int i = 0; i < next.length; i++) {
+            next[i] = tNodes[i].getIndex();
+
+        }
+        if (debug) {
+            // String fcS = new String(fc);
+            // String tS = new String(t);
+            StdOut.println("first index:\t\t" + first);
+            StdOut.println("first column:\t\t" + Arrays.toString(fc));
+            StdOut.println("t column:\t\t" + Arrays.toString(t));
+            // StdOut.println("next array:\t\t" + Arrays.toString(next));
+        }
+
+        return next;
 
     }
 
@@ -58,7 +88,7 @@ public class BurrowsWheeler {
     // reading from standard input and writing to standard output
     public static void inverseTransform() {
         boolean testing = true;
-        // boolean debug = true;
+        boolean debug = true;
 
         String tS;
         int first;
@@ -76,9 +106,12 @@ public class BurrowsWheeler {
         char[] t = tS.toCharArray();
         char[] fc = tS.toCharArray();
         Arrays.sort(fc);
-        keyIndexCounter(fc, t, first);
-
+        int[] next = makeNext(fc, t, first);
+        if (debug) {
+            StdOut.println("next array:\t\t" + Arrays.toString(next));
+        }
         StdOut.println("INVALID");
+        // StdOut.println("INVALID");
     }
 
     // if args[0] is "-", apply Burrows-Wheeler transform
