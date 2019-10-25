@@ -39,9 +39,9 @@ public class BurrowsWheeler {
     }
 
     // https://www.coursera.org/lecture/algorithms-part2/key-indexed-counting-2pi1Z
-    // key index counter to make next[]
-    private static int[] makeNext(char[] fc, char[] t, int first) {
-        boolean debug = true;
+    // key index counter needed to make next[]?
+    // runs out of memory now
+    private static int[] makeNext(char[] t, int first) {
         class TNode implements Comparable<TNode> {
             char value;
             int index;
@@ -59,27 +59,20 @@ public class BurrowsWheeler {
                 return index;
             }
         }
-        int[] next = new int[fc.length];
+        int[] next = new int[t.length];
         TNode[] tNodes = new TNode[t.length];
+
         for (int i = 0; i < next.length; i++) {
             next[i] = -1;
             tNodes[i] = new TNode(t[i], i);
 
         }
+        // need to optimize further?
         Arrays.sort(tNodes);
         for (int i = 0; i < next.length; i++) {
             next[i] = tNodes[i].getIndex();
 
         }
-        if (debug) {
-            // String fcS = new String(fc);
-            // String tS = new String(t);
-            StdOut.println("first index:\t\t" + first);
-            StdOut.println("first column:\t\t" + Arrays.toString(fc));
-            StdOut.println("t column:\t\t" + Arrays.toString(t));
-            // StdOut.println("next array:\t\t" + Arrays.toString(next));
-        }
-
         return next;
 
     }
@@ -87,8 +80,8 @@ public class BurrowsWheeler {
     // apply Burrows-Wheeler inverse transform,
     // reading from standard input and writing to standard output
     public static void inverseTransform() {
-        boolean testing = true;
-        boolean debug = true;
+        boolean testing = false;
+        boolean debug = false;
 
         String tS;
         int first;
@@ -106,12 +99,20 @@ public class BurrowsWheeler {
         char[] t = tS.toCharArray();
         char[] fc = tS.toCharArray();
         Arrays.sort(fc);
-        int[] next = makeNext(fc, t, first);
+        int[] next = makeNext(t, first);
+        StringBuilder inversed = new StringBuilder();
+        for (int i=0; i<t.length; i ++) {
+            inversed.append(fc[first]);
+            first = next[first];
+        }
+
         if (debug) {
+            StdOut.println("first index:\t\t" + first);
+            StdOut.println("first column:\t\t" + Arrays.toString(fc));
+            StdOut.println("t column:\t\t" + Arrays.toString(t));
             StdOut.println("next array:\t\t" + Arrays.toString(next));
         }
-        StdOut.println("INVALID");
-        // StdOut.println("INVALID");
+        StdOut.println(inversed);
     }
 
     // if args[0] is "-", apply Burrows-Wheeler transform
@@ -119,7 +120,7 @@ public class BurrowsWheeler {
     public static void main(String[] args) {
 
         boolean debug = false;
-        boolean testing = true;
+        boolean testing = false;
 
         if (testing) {
             inverseTransform();
