@@ -45,9 +45,10 @@ public class MoveToFront {
         if (debug) {
             StdOut.println(Arrays.toString(in));
             StdOut.println(Arrays.toString(out));
-            // for (int i = 0; i < in.length; i++) {
-            // StdOut.println(moveToFront[i]);
-            // }
+            for (int i = 0; i < in.length; i++) {
+                StdOut.print(moveToFront[i]);
+            }
+            StdOut.println();
         }
 
     }
@@ -88,9 +89,10 @@ public class MoveToFront {
         if (debug) {
             StdOut.println(Arrays.toString(in));
             StdOut.println(Arrays.toString(out));
-            // for (int i = 0; i < in.length; i++) {
-            //     StdOut.println(moveToFront[i]);
-            // }
+            for (int i = 0; i < in.length; i++) {
+                StdOut.print(moveToFront[i]);
+            }
+            StdOut.println();
         }
     }
 
