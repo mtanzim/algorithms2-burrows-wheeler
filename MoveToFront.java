@@ -10,7 +10,8 @@ public class MoveToFront {
         // during testing
         boolean debug = true;
         boolean testing = true;
-        String testString = "CAAABCCCACCF";
+        // String testString = "CAAABCCCACCF";
+        String testString = "MY NAME IS Jonas!!!!";
 
         char in[] = new char[500];
         int out[] = new int[500];
@@ -38,6 +39,7 @@ public class MoveToFront {
                         moveToFront[k] = moveToFront[k - 1];
                     }
                     moveToFront[0] = in[i];
+                    break;
 
                 }
             }
@@ -70,14 +72,13 @@ public class MoveToFront {
         }
 
         if (testing) {
-            in = new int[] { 67, 66, 0, 0, 67, 2, 0, 0, 2, 1, 0, 70 };
+            in = new int[] { 77, 89, 34, 79, 68, 4, 72, 4, 76, 84, 2, 78, 111, 111, 99, 115, 45, 0, 0, 0 };
             out = new char[in.length];
         }
 
         // decode
         for (int i = 0; i < in.length; i++) {
             out[i] = moveToFront[in[i]];
-
             // move jth character to the front
             // shift everything else
             for (int k = in[i]; k > 0; k--) {
