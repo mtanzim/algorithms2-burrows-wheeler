@@ -38,6 +38,8 @@ public class CircularSuffixArray {
     }
 
     // circular suffix array of s
+    // can't use substring due to performance reasons (memory/time)
+    // switch to converting to char array and manipulating before submission
     public CircularSuffixArray(String s) {
         boolean debug = false;
         len = s.length();

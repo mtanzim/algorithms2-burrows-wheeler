@@ -6,6 +6,7 @@ import edu.princeton.cs.algs4.StdOut;
 /**
  * BurrowsWheeler
  */
+// need to use Binary StdIn, not the regular one
 public class BurrowsWheeler {
 
     // apply Burrows-Wheeler transform,
