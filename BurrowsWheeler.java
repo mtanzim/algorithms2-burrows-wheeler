@@ -11,6 +11,7 @@ public class BurrowsWheeler {
 
     // apply Burrows-Wheeler transform,
     // reading from standard input and writing to standard output
+    // don't use substring before submission
     public static void transform() {
         boolean debug = false;
 

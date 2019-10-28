@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import edu.princeton.cs.algs4.StdOut;
 
 public class MoveToFront {
@@ -5,6 +7,30 @@ public class MoveToFront {
     // apply move-to-front encoding, reading from standard input and writing to
     // standard output
     public static void encode() {
+        boolean debug = true;
+        boolean testing = true;
+        // during testing
+        char in[] = new char[500];
+        // array of ascii chars
+        char moveToFront[] = new char[256];
+        
+        for (int i=0; i < 256; i++) {
+            moveToFront[i]= ((char) i);
+        }
+
+
+        if (testing) {
+            in = "CAAABCCCACCF".toCharArray();
+            if (debug) {
+                StdOut.println(Arrays.toString(in));
+                // StdOut.println(Arrays.toString(moveToFront));
+                for (int i =65; i < 91; i++) {
+                    StdOut.println(moveToFront[i]);
+                }
+            }
+        }
+
+
 
     }
 
@@ -19,7 +45,7 @@ public class MoveToFront {
     public static void main(String[] args) {
 
         boolean debug = false;
-        boolean testing = false;
+        boolean testing = true;
 
         if (testing) {
             encode();
