@@ -4,5 +4,6 @@
     "java.checkstyle.properties": {
         "basedir": "${workspaceFolder}",
         "suppressions": "${workspaceFolder}/.lift/checkstyle-suppressions.xml"
-    }
+    },
+    "java.dependency.packagePresentation": "flat"
 }
