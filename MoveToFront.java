@@ -7,30 +7,47 @@ public class MoveToFront {
     // apply move-to-front encoding, reading from standard input and writing to
     // standard output
     public static void encode() {
+        // during testing
         boolean debug = true;
         boolean testing = true;
-        // during testing
+        String testString = "CAAABCCCACCF";
+
         char in[] = new char[500];
+        int out[] = new int[500];
+
         // array of ascii chars
         char moveToFront[] = new char[256];
-        
-        for (int i=0; i < 256; i++) {
-            moveToFront[i]= ((char) i);
+
+        for (int i = 0; i < 256; i++) {
+            moveToFront[i] = ((char) i);
         }
 
-
         if (testing) {
-            in = "CAAABCCCACCF".toCharArray();
-            if (debug) {
-                StdOut.println(Arrays.toString(in));
-                // StdOut.println(Arrays.toString(moveToFront));
-                for (int i =65; i < 91; i++) {
-                    StdOut.println(moveToFront[i]);
+            in = testString.toCharArray();
+            out = new int[in.length];
+        }
+
+        for (int i = 0; i < in.length; i++) {
+            for (int j = 0; j < moveToFront.length; j++) {
+                if (in[i] == moveToFront[j]) {
+                    out[i] = j;
+                    // move jth character to the front
+                    // shift everything else
+                    for (int k = j; k > 0; k--) {
+                        moveToFront[k] = moveToFront[k - 1];
+                    }
+                    moveToFront[0] = in[i];
+
                 }
             }
         }
-
-
+        if (debug) {
+            StdOut.println(Arrays.toString(in));
+            // StdOut.println(Arrays.toString(moveToFront));
+            for (int i = 0; i < in.length; i++) {
+                StdOut.println(moveToFront[i]);
+            }
+        }
 
     }
 
