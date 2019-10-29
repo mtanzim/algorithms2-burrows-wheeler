@@ -19,13 +19,13 @@ public class MoveToFront {
         for (int i = 0; i < 256; i++) {
             moveToFront[i] = ((char) i);
         }
-        ArrayList<Integer> outL = new ArrayList<Integer>();
+        ArrayList<Character> outL = new ArrayList<Character>();
         while (!BinaryStdIn.isEmpty()) {
             char curChar = BinaryStdIn.readChar();
             for (int j = 0; j < moveToFront.length; j++) {
                 if (curChar == moveToFront[j]) {
                     // out[i] = j;
-                    outL.add(j);
+                    outL.add((char)j);
                     // move jth character to the front
                     // shift everything else
                     for (int k = j; k > 0; k--) {
@@ -45,9 +45,9 @@ public class MoveToFront {
             }
             StdOut.println();
         }
-        for (int outC : outL) {
+        for (char outC : outL) {
             // StdOut.print(outC);
-            BinaryStdOut.write((char) outC);
+            BinaryStdOut.write(outC);
         }
         BinaryStdOut.flush();
 
