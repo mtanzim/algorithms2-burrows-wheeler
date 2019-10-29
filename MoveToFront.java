@@ -11,7 +11,7 @@ public class MoveToFront {
     // standard output
     public static void encode() {
         // during testing
-        boolean debug = false;
+        // boolean debug = false;
         // String testString = "CAAABCCCACCF";
         char moveToFront[] = new char[256];
 
@@ -37,14 +37,14 @@ public class MoveToFront {
                 }
             }
         }
-        if (debug) {
-            // StdOut.println(Arrays.toString(in));
-            StdOut.println(Arrays.toString(outL.toArray()));
-            for (int i = 0; i < outL.size(); i++) {
-                StdOut.print(moveToFront[i]);
-            }
-            StdOut.println();
-        }
+        // if (debug) {
+        //     StdOut.println(Arrays.toString(in));
+        //     StdOut.println(Arrays.toString(outL.toArray()));
+        //     for (int i = 0; i < outL.size(); i++) {
+        //         StdOut.print(moveToFront[i]);
+        //     }
+        //     StdOut.println();
+        // }
         for (char outC : outL) {
             // StdOut.print(outC);
             BinaryStdOut.write(outC);
@@ -56,45 +56,53 @@ public class MoveToFront {
     // apply move-to-front decoding, reading from standard input and writing to
     // standard output
     public static void decode() {
-        boolean debug = true;
-        boolean testing = false;
-        int testSeq[] = new int[] { 77, 89, 34, 79, 68, 4, 72, 4, 76, 84, 2, 78, 111, 111, 99, 115, 45, 0, 0, 0 };
+        // boolean debug = true;
+        // boolean testing = false;
+        // int testSeq[] = new int[] { 77, 89, 34, 79, 68, 4, 72, 4, 76, 84, 2, 78, 111, 111, 99, 115, 45, 0, 0, 0 };
 
-        int in[] = new int[500];
-        char out[] = new char[500];
+        // int in[] = new int[500];
+        // char out[] = new char[500];
 
         // array of ascii chars
         char moveToFront[] = new char[256];
-
         // initialize
         for (int i = 0; i < 256; i++) {
             moveToFront[i] = ((char) i);
         }
 
-        if (testing) {
-            in = testSeq;
-            out = new char[in.length];
-        }
+        // if (testing) {
+        //     in = testSeq;
+        //     out = new char[in.length];
+        // }
 
         // decode
-        for (int i = 0; i < in.length; i++) {
-            out[i] = moveToFront[in[i]];
+        ArrayList<Character> outL = new ArrayList<Character>();
+        while (!BinaryStdIn.isEmpty()) {
+        // for (int i = 0; i < in.length; i++) {
+            int curIdx = (int) BinaryStdIn.readChar();
+            char curChar = moveToFront[curIdx];
+            outL.add(curChar);
             // move jth character to the front
             // shift everything else
-            for (int k = in[i]; k > 0; k--) {
+            for (int k = curIdx; k > 0; k--) {
                 moveToFront[k] = moveToFront[k - 1];
             }
-            moveToFront[0] = out[i];
+            moveToFront[0] = curChar;
 
         }
-        if (debug) {
-            StdOut.println(Arrays.toString(in));
-            StdOut.println(Arrays.toString(out));
-            for (int i = 0; i < in.length; i++) {
-                StdOut.print(moveToFront[i]);
-            }
-            StdOut.println();
+        for (char outC : outL) {
+            // StdOut.print(outC);
+            BinaryStdOut.write(outC);
         }
+        BinaryStdOut.flush();
+        // if (debug) {
+        //     StdOut.println(Arrays.toString(in));
+        //     StdOut.println(Arrays.toString(out));
+        //     for (int i = 0; i < in.length; i++) {
+        //         StdOut.print(moveToFront[i]);
+        //     }
+        //     StdOut.println();
+        // }
     }
 
     // if args[0] is "-", apply move-to-front encoding
