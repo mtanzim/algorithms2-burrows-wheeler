@@ -44,7 +44,7 @@ public class CircularSuffixArray {
         boolean debug = false;
         len = s.length();
         suffixes = new CircularSuffix[len];
-        char curString[] = new char[s.length()];
+        char[] curString = new char[s.length()];
 
         for (int i = 0; i < len; i++) {
             int k = 0;

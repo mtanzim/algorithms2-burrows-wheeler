@@ -31,26 +31,28 @@ public class BurrowsWheeler {
         ArrayList<Character> transformed = new ArrayList<Character>();
 
         int first = -1;
-        char curString[] = new char[inputS.length()];
+        char[] curString = new char[inputS.length()];
         for (int i = 0; i < len; i++) {
             int curIdx = sa.index(i);
             boolean isFirst = true;
-            int k=0;
-            for (int j=curIdx; j < inputS.length(); j++) {
-                curString[k]=inputS.charAt(j);
-                if (isFirst && curString[k] != inputS.charAt(k)) isFirst=false;
+            int k = 0;
+            for (int j = curIdx; j < inputS.length(); j++) {
+                curString[k] = inputS.charAt(j);
+                if (isFirst && curString[k] != inputS.charAt(k))
+                    isFirst = false;
                 k++;
             }
-            for (int j=0; j < curIdx; j++) {
-                curString[k]=inputS.charAt(j);
-                if (isFirst && curString[k] != inputS.charAt(k)) isFirst=false;
+            for (int j = 0; j < curIdx; j++) {
+                curString[k] = inputS.charAt(j);
+                if (isFirst && curString[k] != inputS.charAt(k))
+                    isFirst = false;
                 k++;
             }
-            
+
             if (isFirst) {
                 first = i;
             }
-            transformed.add(curString[len-1]);
+            transformed.add(curString[len - 1]);
         }
         // StdOut.println(first);
         // StdOut.println(transformed);
