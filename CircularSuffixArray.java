@@ -13,7 +13,7 @@ public class CircularSuffixArray {
     private int len;
     private CircularSuffix[] suffixes;
 
-    class CircularSuffix implements Comparable<CircularSuffix> {
+    private class CircularSuffix implements Comparable<CircularSuffix> {
         int id;
         String value;
 
@@ -29,10 +29,6 @@ public class CircularSuffixArray {
 
         public int getId() {
             return id;
-        }
-
-        public String getValue() {
-            return value;
         }
 
     }
