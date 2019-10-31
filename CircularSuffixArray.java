@@ -17,9 +17,9 @@ public class CircularSuffixArray {
         int id;
         String value;
 
-        public CircularSuffix(int id, String value) {
+        public CircularSuffix(int id, char[] value) {
             this.id = id;
-            this.value = value;
+            this.value = new String(value);
 
         }
 
@@ -44,11 +44,19 @@ public class CircularSuffixArray {
         boolean debug = false;
         len = s.length();
         suffixes = new CircularSuffix[len];
+        char curString[] = new char[s.length()];
 
         for (int i = 0; i < len; i++) {
-            String sliceA = s.substring(i, s.length());
-            String sliceB = s.substring(0, i);
-            suffixes[i] = new CircularSuffix(i, sliceA + sliceB);
+            int k = 0;
+            for (int j = i; j < s.length(); j++) {
+                curString[k] = s.charAt(j);
+                k++;
+            }
+            for (int j = 0; j < i; j++) {
+                curString[k] = s.charAt(j);
+                k++;
+            }
+            suffixes[i] = new CircularSuffix(i, curString);
         }
         Arrays.sort(suffixes);
         if (debug) {
@@ -72,8 +80,8 @@ public class CircularSuffixArray {
     // unit testing (required)
     public static void main(String[] args) {
         In in = new In(args[0]);
-        String inputS = in.readAll();
-        CircularSuffixArray sa = new CircularSuffixArray(inputS);
+        String s = in.readAll();
+        CircularSuffixArray sa = new CircularSuffixArray(s);
         int len = sa.length();
         for (int i = 0; i < len; i++) {
             StdOut.println(sa.index(i));

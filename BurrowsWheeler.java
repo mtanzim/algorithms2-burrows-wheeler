@@ -31,12 +31,11 @@ public class BurrowsWheeler {
         ArrayList<Character> transformed = new ArrayList<Character>();
 
         int first = -1;
+        char curString[] = new char[inputS.length()];
         for (int i = 0; i < len; i++) {
             int curIdx = sa.index(i);
-            char curString[] = new char[inputS.length()];
-            int k=0;
-
             boolean isFirst = true;
+            int k=0;
             for (int j=curIdx; j < inputS.length(); j++) {
                 curString[k]=inputS.charAt(j);
                 if (isFirst && curString[k] != inputS.charAt(k)) isFirst=false;
@@ -48,16 +47,6 @@ public class BurrowsWheeler {
                 k++;
             }
             
-            // fix this, can't use substring
-            // String sliceA = inputS.substring(curIdx, inputS.length());
-            // String sliceB = inputS.substring(0, curIdx);
-            // String curString = sliceA + sliceB;
-            // StdOut.println(curString.charAt(len-1));
-            // StdOut.println(Arrays.toString(curString));
-
-            // if (Arrays.toString(curString).compareTo(inputS) == 0) {
-            //     first = i;
-            // }
             if (isFirst) {
                 first = i;
             }
