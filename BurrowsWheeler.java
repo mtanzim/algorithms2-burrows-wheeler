@@ -1,8 +1,11 @@
 import java.util.Arrays;
-
-import edu.princeton.cs.algs4.In;
+import java.util.ArrayList;
+// import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.BinaryStdIn;
+import edu.princeton.cs.algs4.BinaryStdOut;
 
+// import edu.princeton.cs.algs4.BinaryStdOut;
 /**
  * BurrowsWheeler
  */
@@ -16,17 +19,21 @@ public class BurrowsWheeler {
         boolean debug = false;
 
         // transform
-        In in = new In();
-        String inputS = in.readAll();
+        // In in = new In();
+        // String inputS = in.readAll();
+        String inputS = BinaryStdIn.readString();
         if (debug) {
             StdOut.println(inputS);
         }
         CircularSuffixArray sa = new CircularSuffixArray(inputS);
         int len = sa.length();
-        StringBuilder transformed = new StringBuilder();
+        // StringBuilder transformed = new StringBuilder();
+        ArrayList<Character> transformed = new ArrayList<Character>();
+
         int first = -1;
         for (int i = 0; i < len; i++) {
             int curIdx = sa.index(i);
+            // fix this, can't use substring
             String sliceA = inputS.substring(curIdx, inputS.length());
             String sliceB = inputS.substring(0, curIdx);
             String curString = sliceA + sliceB;
@@ -34,10 +41,15 @@ public class BurrowsWheeler {
             if (curString.compareTo(inputS) == 0) {
                 first = i;
             }
-            transformed.append(curString.charAt(len - 1));
+            transformed.add(curString.charAt(len - 1));
         }
-        StdOut.println(first);
-        StdOut.println(transformed);
+        // StdOut.println(first);
+        // StdOut.println(transformed);
+        BinaryStdOut.write(first);
+        for (char outC : transformed) {
+            BinaryStdOut.write(outC);
+        }
+        BinaryStdOut.flush();
     }
 
     // https://www.coursera.org/lecture/algorithms-part2/key-indexed-counting-2pi1Z
@@ -93,18 +105,21 @@ public class BurrowsWheeler {
             tS = "ARD!RCAAAABB";
             first = 3;
         } else {
-            In in = new In();
-            first = in.readInt();
-            tS = in.readString();
+            // In in = new In();
+            // first = in.readInt();
+            // tS = in.readString();
+            first = BinaryStdIn.readInt();
+            tS = BinaryStdIn.readString();
         }
 
         char[] t = tS.toCharArray();
         char[] fc = tS.toCharArray();
         Arrays.sort(fc);
         int[] next = makeNext(t, first);
-        StringBuilder inversed = new StringBuilder();
-        for (int i=0; i<t.length; i ++) {
-            inversed.append(fc[first]);
+        // StringBuilder inversed = new StringBuilder();
+        ArrayList<Character> inversed = new ArrayList<Character>();
+        for (int i = 0; i < t.length; i++) {
+            inversed.add(fc[first]);
             first = next[first];
         }
 
@@ -114,7 +129,11 @@ public class BurrowsWheeler {
             StdOut.println("t column:\t\t" + Arrays.toString(t));
             StdOut.println("next array:\t\t" + Arrays.toString(next));
         }
-        StdOut.println(inversed);
+        // StdOut.println(inversed);
+        for (char outC : inversed) {
+            BinaryStdOut.write(outC);
+        }
+        BinaryStdOut.flush();
     }
 
     // if args[0] is "-", apply Burrows-Wheeler transform
