@@ -14,20 +14,6 @@ public class CircularSuffixArray {
     private CircularSuffix[] suffixes;
     private String s;
 
-    private String makeString(int id) {
-        char[] curChar = new char[s.length()];
-        int k = 0;
-        for (int j = id; j < s.length(); j++) {
-            curChar[k] = s.charAt(j);
-            k++;
-        }
-        for (int j = 0; j < id; j++) {
-            curChar[k] = s.charAt(j);
-            k++;
-        }
-        return new String(curChar);
-    }
-
     private class CircularSuffix implements Comparable<CircularSuffix> {
         int id;
 
@@ -36,7 +22,23 @@ public class CircularSuffixArray {
         }
 
         public int compareTo(CircularSuffix that) {
-            return makeString(id).compareTo(makeString(that.id));
+            int i = id;
+            int j = that.id;
+            int k = 0;
+            while (k < s.length()) {
+                if (s.charAt(i) > s.charAt(j))
+                    return 1;
+                else if (s.charAt(i) < s.charAt(j))
+                    return -1;
+                i++;
+                j++;
+                k++;
+                if (i == s.length())
+                    i = 0;
+                if (j == s.length())
+                    k = 0;
+            }
+            return 0;
         }
 
         public int getId() {
@@ -63,7 +65,7 @@ public class CircularSuffixArray {
         Arrays.sort(suffixes);
         if (debug) {
             for (int i = 0; i < len; i++) {
-                StdOut.println(suffixes[i].getId() + ":" + makeString(suffixes[i].id));
+                // StdOut.println(suffixes[i].getId() + ":" + makeString(suffixes[i].id));
             }
         }
 

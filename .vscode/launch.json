@@ -15,7 +15,7 @@
       "request": "launch",
       "mainClass": "CircularSuffixArray",
       "projectName": "burrows_afc1f0ec",
-      "args": "abra.txt",
+      "args": "aesop.txt",
       "vmArgs": "-ea"
     },
     {
