@@ -37,6 +37,11 @@ public class CircularSuffixArray {
     // can't use substring due to performance reasons (memory/time)
     // switch to converting to char array and manipulating before submission
     public CircularSuffixArray(String s) {
+
+        if (s == null) {
+            throw new IllegalArgumentException("null string");
+        }
+
         boolean debug = false;
         len = s.length();
         suffixes = new CircularSuffix[len];
