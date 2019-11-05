@@ -4,14 +4,16 @@
  *  Description: CircularSuffixArray for BW transform
  **************************************************************************** */
 
-import java.util.Arrays;
+// import java.util.Arrays;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.RedBlackBST;;
 
 public class CircularSuffixArray {
     private int len;
-    private CircularSuffix[] suffixes;
+    // private CircularSuffix[] suffixes;
+    private RedBlackBST<CircularSuffix, Boolean> suffixes;
     private String s;
 
     private class CircularSuffix implements Comparable<CircularSuffix> {
@@ -58,11 +60,12 @@ public class CircularSuffixArray {
 
         boolean debug = false;
         len = s.length();
-        suffixes = new CircularSuffix[len];
+        // suffixes = new CircularSuffix[len];
+        suffixes = new RedBlackBST<CircularSuffix, Boolean>();
         for (int i = 0; i < len; i++) {
-            suffixes[i] = new CircularSuffix(i);
+            suffixes.put(new CircularSuffix(i),false);
         }
-        Arrays.sort(suffixes);
+        // Arrays.sort(suffixes);
         if (debug) {
             for (int i = 0; i < len; i++) {
                 // StdOut.println(suffixes[i].getId() + ":" + makeString(suffixes[i].id));
@@ -81,7 +84,7 @@ public class CircularSuffixArray {
         if (i < 0 || i >= len) {
             throw new IllegalArgumentException("bad index");
         }
-        return suffixes[i].getId();
+        return suffixes.select(i).getId();
     }
 
     // unit testing (required)

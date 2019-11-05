@@ -17,7 +17,8 @@
     {
       "label": "Test Burrows",
       "type": "shell",
-      "command": "java-algs4 BurrowsWheeler - < abra.txt | java-algs4 BurrowsWheeler +",
+      // "command": "java-algs4 BurrowsWheeler - < abra.txt | java-algs4 BurrowsWheeler +",
+      "command": "java-algs4 BurrowsWheeler - < aesop.txt | java-algs4 BurrowsWheeler +",
       "problemMatcher": [],
       "dependsOn": ["Compile"]
     },
