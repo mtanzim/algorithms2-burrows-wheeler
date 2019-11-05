@@ -36,7 +36,7 @@ public class CircularSuffixArray {
                 if (i == s.length())
                     i = 0;
                 if (j == s.length())
-                    k = 0;
+                    j = 0;
             }
             return 0;
         }
