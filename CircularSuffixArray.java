@@ -12,19 +12,31 @@ import edu.princeton.cs.algs4.StdOut;
 public class CircularSuffixArray {
     private int len;
     private CircularSuffix[] suffixes;
+    private String s;
+
+    private String makeString(int id) {
+        char[] curChar = new char[s.length()];
+        int k = 0;
+        for (int j = id; j < s.length(); j++) {
+            curChar[k] = s.charAt(j);
+            k++;
+        }
+        for (int j = 0; j < id; j++) {
+            curChar[k] = s.charAt(j);
+            k++;
+        }
+        return new String(curChar);
+    }
 
     private class CircularSuffix implements Comparable<CircularSuffix> {
         int id;
-        String value;
 
-        public CircularSuffix(int id, char[] value) {
+        public CircularSuffix(int id) {
             this.id = id;
-            this.value = new String(value);
-
         }
 
         public int compareTo(CircularSuffix that) {
-            return value.compareTo(that.value);
+            return makeString(id).compareTo(makeString(that.id));
         }
 
         public int getId() {
@@ -37,32 +49,21 @@ public class CircularSuffixArray {
     // can't use substring due to performance reasons (memory/time)
     // switch to converting to char array and manipulating before submission
     public CircularSuffixArray(String s) {
-
         if (s == null) {
             throw new IllegalArgumentException("null string");
         }
+        this.s = s;
 
         boolean debug = false;
         len = s.length();
         suffixes = new CircularSuffix[len];
-        char[] curString = new char[s.length()];
-
         for (int i = 0; i < len; i++) {
-            int k = 0;
-            for (int j = i; j < s.length(); j++) {
-                curString[k] = s.charAt(j);
-                k++;
-            }
-            for (int j = 0; j < i; j++) {
-                curString[k] = s.charAt(j);
-                k++;
-            }
-            suffixes[i] = new CircularSuffix(i, curString);
+            suffixes[i] = new CircularSuffix(i);
         }
         Arrays.sort(suffixes);
         if (debug) {
             for (int i = 0; i < len; i++) {
-                StdOut.println(suffixes[i].getId() + ":" + suffixes[i].value);
+                StdOut.println(suffixes[i].getId() + ":" + makeString(suffixes[i].id));
             }
         }
 
