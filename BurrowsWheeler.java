@@ -16,7 +16,6 @@ public class BurrowsWheeler {
     // reading from standard input and writing to standard output
     // don't use substring before submission
     public static void transform() {
-        boolean debug = false;
         // transform
         String inputS = BinaryStdIn.readString();
         CircularSuffixArray sa = new CircularSuffixArray(inputS);
