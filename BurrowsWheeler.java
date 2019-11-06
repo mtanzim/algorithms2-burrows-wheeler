@@ -21,42 +21,54 @@ public class BurrowsWheeler {
         String inputS = BinaryStdIn.readString();
         CircularSuffixArray sa = new CircularSuffixArray(inputS);
         int len = sa.length();
-        char [] transformed = new char[len];
+        char[] transformed = new char[len];
         boolean foundFirst = false;
-        char[] curString = new char[inputS.length()];
+        // char[] curString = new char[inputS.length()];
+
         for (int i = 0; i < len; i++) {
             int curIdx = sa.index(i);
+            int last_pos = curIdx - 1;
+            if (last_pos < 0)
+                last_pos = len - 1;
+            // int lastPos = len -i ;
             boolean isFirst = true;
             int k = 0;
             for (int j = curIdx; j < inputS.length(); j++) {
-                curString[k] = inputS.charAt(j);
-                if (!foundFirst && isFirst && curString[k] != inputS.charAt(k))
+                // curString[k] = inputS.charAt(j);
+                if (!foundFirst && isFirst && inputS.charAt(j) != inputS.charAt(k))
                     isFirst = false;
                 k++;
             }
             for (int j = 0; j < curIdx; j++) {
-                curString[k] = inputS.charAt(j);
-                if (!foundFirst && isFirst && curString[k] != inputS.charAt(k))
+                // curString[k] = inputS.charAt(j);
+                if (!foundFirst && isFirst && inputS.charAt(j) != inputS.charAt(k))
                     isFirst = false;
                 k++;
             }
+
+            // StdOut.println("j: " + j + "curIdx: " + curIdx);
+
+            // StdOut.println("j: " + curString[len - 1] + "curIdx: " + inputS.charAt(last_pos));
 
             // found first
             if (!foundFirst && isFirst) {
                 // StdOut.println(i);
                 BinaryStdOut.write(i);
-                for (int l = 0; l < i; l++ ) {
+                for (int l = 0; l < i; l++) {
                     BinaryStdOut.write(transformed[l]);
                 }
                 foundFirst = true;
                 // first = i;
             }
 
+            // StdOut.println(curString[len - 1]);
+
             if (foundFirst) {
-                BinaryStdOut.write(curString[len - 1]);
-            }
-            else {
-                transformed[i] = curString[len - 1];
+                // BinaryStdOut.write(curString[len - 1]);
+                BinaryStdOut.write(inputS.charAt(last_pos));
+            } else {
+                // transformed[i] = curString[len - 1];
+                transformed[i] = inputS.charAt(last_pos);
             }
 
         }
@@ -66,7 +78,7 @@ public class BurrowsWheeler {
             // StdOut.println(transformed);
         }
         // for (int i=0; i< len; i++) {
-        //     BinaryStdOut.write(transformed[i]);
+        // BinaryStdOut.write(transformed[i]);
         // }
         BinaryStdOut.flush();
     }
