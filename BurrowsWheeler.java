@@ -28,27 +28,12 @@ public class BurrowsWheeler {
             int last_pos = curIdx - 1;
             if (last_pos < 0)
                 last_pos = len - 1;
-
-            if (!foundFirst) {
-                boolean isFirst = true;
-                int k = 0;
-                for (int j = curIdx; j < inputS.length(); j++) {
-                    if (isFirst && inputS.charAt(j) != inputS.charAt(k))
-                        isFirst = false;
-                    k++;
+            if (curIdx == 0) {
+                BinaryStdOut.write(i);
+                for (int l = 0; l < i; l++) {
+                    BinaryStdOut.write(transformed[l]);
                 }
-                for (int j = 0; j < curIdx; j++) {
-                    if (isFirst && inputS.charAt(j) != inputS.charAt(k))
-                        isFirst = false;
-                    k++;
-                }
-                if (isFirst) {
-                    BinaryStdOut.write(i);
-                    for (int l = 0; l < i; l++) {
-                        BinaryStdOut.write(transformed[l]);
-                    }
-                    foundFirst = true;
-                }
+                foundFirst = true;
             }
 
             if (foundFirst) {
