@@ -17,20 +17,12 @@ public class BurrowsWheeler {
     // don't use substring before submission
     public static void transform() {
         boolean debug = false;
-
         // transform
-        // In in = new In();
-        // String inputS = in.readAll();
         String inputS = BinaryStdIn.readString();
-        if (debug) {
-            StdOut.println(inputS);
-        }
         CircularSuffixArray sa = new CircularSuffixArray(inputS);
         int len = sa.length();
-        // StringBuilder transformed = new StringBuilder();
-        ArrayList<Character> transformed = new ArrayList<Character>();
-
-        int first = -1;
+        char [] transformed = new char[len];
+        boolean foundFirst = false;
         char[] curString = new char[inputS.length()];
         for (int i = 0; i < len; i++) {
             int curIdx = sa.index(i);
@@ -38,28 +30,44 @@ public class BurrowsWheeler {
             int k = 0;
             for (int j = curIdx; j < inputS.length(); j++) {
                 curString[k] = inputS.charAt(j);
-                if (isFirst && curString[k] != inputS.charAt(k))
+                if (!foundFirst && isFirst && curString[k] != inputS.charAt(k))
                     isFirst = false;
                 k++;
             }
             for (int j = 0; j < curIdx; j++) {
                 curString[k] = inputS.charAt(j);
-                if (isFirst && curString[k] != inputS.charAt(k))
+                if (!foundFirst && isFirst && curString[k] != inputS.charAt(k))
                     isFirst = false;
                 k++;
             }
 
-            if (isFirst) {
-                first = i;
+            // found first
+            if (!foundFirst && isFirst) {
+                // StdOut.println(i);
+                BinaryStdOut.write(i);
+                for (int l = 0; l < i; l++ ) {
+                    BinaryStdOut.write(transformed[l]);
+                }
+                foundFirst = true;
+                // first = i;
             }
-            transformed.add(curString[len - 1]);
+
+            if (foundFirst) {
+                BinaryStdOut.write(curString[len - 1]);
+            }
+            else {
+                transformed[i] = curString[len - 1];
+            }
+
         }
-        // StdOut.println(first);
-        // StdOut.println(transformed);
-        BinaryStdOut.write(first);
-        for (char outC : transformed) {
-            BinaryStdOut.write(outC);
+        if (debug) {
+            // StdOut.println(inputS);
+            // StdOut.println(first);
+            // StdOut.println(transformed);
         }
+        // for (int i=0; i< len; i++) {
+        //     BinaryStdOut.write(transformed[i]);
+        // }
         BinaryStdOut.flush();
     }
 
